@@ -27,4 +27,4 @@ def get_elements(screenshot):
 
 
 def new_page():
-  
+  pass
