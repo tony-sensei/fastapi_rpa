@@ -1,6 +1,9 @@
 import pyautogui
 import cv2
 import os
+import time
+from paddleocr import PaddleOCR, draw_ocr
+import subprocess
 
 def get_elements(screenshot):
   
@@ -20,11 +23,31 @@ def get_elements(screenshot):
     icons.append((icon, (x, y)))
   
   # word extraction
-  ocr = paddleocr.OCR() 
+  ocr = PaddleOCR.OCR(lang="en") 
   texts = ocr.ocr(screenshot)
   text_data = [(line[-1][0], line[-1][-1]) for line in texts] 
+  return [icons, text_data]
 
 
+def open_search_engine():
+  """
+  Open a new search engine, Google Chrom here (MacOS)
+  """
+  subprocess.run(["open", "-a", "Google Chrome"])
+  time.sleep(1)
+  return
 
-def new_page():
-  pass
+
+def new_page(url):
+  """
+  Open a new page in Google Chrome
+  """
+  pyautogui.hotkey('command', 't')
+  time.sleep(1)
+
+  # Type the text
+  pyautogui.write(url)
+  pyautogui.press('enter')
+  time.sleep(2)
+  return
+  
