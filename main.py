@@ -1,25 +1,20 @@
-from fastapi import FastAPI
-import pyautogui
-import time
-import os
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
+import cv2
 import numpy as np
-import cv2 
-import subprocess
-from actions import *
-
+from actions import get_elements
 
 app = FastAPI()
 
-@app.get("/")
-def root():
-    print("started")
-    # Minimize all windows on Mac
-    pyautogui.hotkey('option', 'command', 'm')
+@app.post("/process-screenshot/")
+async def process_screenshot(file: UploadFile = File(...)):
+    # Read the uploaded file
+    image_data = await file.read()
+    nparr = np.frombuffer(image_data, np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-    # Open Google Chrome on Mac
-    open_search_engine()
-    new_page("youtube.com")
+    # Process the screenshot
+    elements = get_elements(img)
 
-
-    
-
+    # Return the processed data as JSON
+    return JSONResponse(content={"elements": elements})
