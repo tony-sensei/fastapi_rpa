@@ -19,10 +19,13 @@ def get_elements(img):
     # icon extraction
     contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     icons = []
-    for contour in contours:
-        x, y, w, h = cv2.boundingRect(contour)
-        icon = img[y:y+h, x:x+w]
-        icons.append((convert_image_to_base64(icon), (x, y)))
+
+
+    # for contour in contours:
+    #     x, y, w, h = cv2.boundingRect(contour)
+
+    #     icon = img[y:y+h, x:x+w]
+    #     icons.append((convert_image_to_base64(icon), (x, y)))
     
     # word extraction
     ocr = PaddleOCR(use_angle_cls=True, lang="en") 
