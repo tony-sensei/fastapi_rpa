@@ -17,7 +17,6 @@ The project uses FastAPI for creating the web application, and several other lib
  ```
 git clone https://github.com/tony-sensei/fastapi_rpa.git
 cd fastapi_rpa
-
  ```
 
 2. Create a virtual environment and activate it:
@@ -25,14 +24,12 @@ cd fastapi_rpa
  ```
 python3 -m venv env
 source env/bin/activate
-
  ```
 
 3. Install the required packages:
 
 ```
 pip install -r requirements.txt
-
 ```
 
 ## Usage
@@ -41,14 +38,12 @@ pip install -r requirements.txt
 
 ```
 uvicorn main:app --reload
-
 ```
 
 2. In another terminal, run the automation script:
 
 ```
 python3 automation.py
-
 ```
 
 
